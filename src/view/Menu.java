@@ -69,6 +69,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.setForeground(new java.awt.Color(0, 0, 0));
         jMenu1.setMnemonic('G');
         jMenu1.setText("Gerenciar");
+        jMenu1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         jmiCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmiCliente.setMnemonic('C');
@@ -106,6 +107,7 @@ public class Menu extends javax.swing.JFrame {
         jmVendaLivro.setForeground(new java.awt.Color(0, 0, 0));
         jmVendaLivro.setMnemonic('V');
         jmVendaLivro.setText("Venda Livro");
+        jmVendaLivro.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuBar1.add(jmVendaLivro);
 
         setJMenuBar(jMenuBar1);
