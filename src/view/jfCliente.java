@@ -41,21 +41,21 @@ public class jfCliente extends javax.swing.JFrame {
         jtfCPF = new javax.swing.JTextField();
         jtfNome = new javax.swing.JTextField();
         jftfTelefone = new javax.swing.JFormattedTextField();
-        jbSalvar = new javax.swing.JButton();
         jbFechar = new javax.swing.JButton();
         jbEditar = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtClientes = new javax.swing.JTable();
+        jbSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerência Cliente");
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gerência Cliente");
 
@@ -75,10 +75,12 @@ public class jfCliente extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Telefone:");
 
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
+        jtfEndereco.setBackground(new java.awt.Color(102, 102, 102));
         jtfEndereco.setToolTipText("Endereço completo");
 
+        jtfCPF.setBackground(new java.awt.Color(102, 102, 102));
         jtfCPF.setToolTipText("Informe somente números");
         jtfCPF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -91,13 +93,20 @@ public class jfCliente extends javax.swing.JFrame {
             }
         });
 
+        jtfNome.setBackground(new java.awt.Color(102, 102, 102));
         jtfNome.setToolTipText("Informe o nome completo");
+        jtfNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNomeActionPerformed(evt);
+            }
+        });
         jtfNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtfNomeKeyTyped(evt);
             }
         });
 
+        jftfTelefone.setBackground(new java.awt.Color(102, 102, 102));
         try {
             jftfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
@@ -105,13 +114,8 @@ public class jfCliente extends javax.swing.JFrame {
         }
         jftfTelefone.setToolTipText("Informe somente números");
 
-        jbSalvar.setText("Salvar");
-        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalvarActionPerformed(evt);
-            }
-        });
-
+        jbFechar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbFechar.setForeground(new java.awt.Color(0, 0, 0));
         jbFechar.setText("Fechar");
         jbFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,9 +123,13 @@ public class jfCliente extends javax.swing.JFrame {
             }
         });
 
+        jbEditar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbEditar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditar.setText("Editar");
         jbEditar.setEnabled(false);
 
+        jbLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbLimpar.setForeground(new java.awt.Color(0, 0, 0));
         jbLimpar.setText("Limpar");
         jbLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,8 +137,9 @@ public class jfCliente extends javax.swing.JFrame {
             }
         });
 
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
+        jtClientes.setBackground(new java.awt.Color(102, 102, 102));
         jtClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
@@ -161,6 +170,15 @@ public class jfCliente extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtClientes);
 
+        jbSalvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbSalvar.setForeground(new java.awt.Color(0, 0, 0));
+        jbSalvar.setText("Salvar");
+        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalvarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,12 +198,12 @@ public class jfCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfEndereco)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jtfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jftfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jftfTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                             .addComponent(jtfNome)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbLimpar)
@@ -218,17 +236,16 @@ public class jfCliente extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jtfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbFechar)
-                        .addComponent(jbEditar)
-                        .addComponent(jbLimpar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbFechar)
+                    .addComponent(jbEditar)
+                    .addComponent(jbLimpar)
+                    .addComponent(jbSalvar))
+                .addGap(13, 13, 13)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,10 +291,6 @@ public class jfCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtfNomeKeyTyped
 
-    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbSalvarActionPerformed
-
     private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
         // TODO add your handling code here:
         this.dispose();//Fecha formulário, mas não fecha a aplicação.
@@ -299,6 +312,14 @@ public class jfCliente extends javax.swing.JFrame {
         jbLimpar.setEnabled(false);
         jtfCPF.setEnabled(false);
     }//GEN-LAST:event_jtClientesMouseClicked
+
+    private void jtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNomeActionPerformed
+
+    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSalvarActionPerformed
 
     /**
      * @param args the command line arguments

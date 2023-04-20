@@ -137,7 +137,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiLivroActionPerformed
 
     private void jmiEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEditoraActionPerformed
-        JOptionPane.showMessageDialog(this, "Cadastrar Editora!");
+       jfEditora janelaEditora = new jfEditora();//Para abrir a tela editora
+        janelaEditora.setVisible(true);
     }//GEN-LAST:event_jmiEditoraActionPerformed
 
     /**

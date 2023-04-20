@@ -36,6 +36,7 @@ public class jfEditora extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jtfEditEndereco = new javax.swing.JTextField();
         jtfEditCNPJ = new javax.swing.JTextField();
@@ -49,14 +50,14 @@ public class jfEditora extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtEditoras = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerência Editora");
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(163, 0, 163));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gerência Editora");
 
@@ -76,10 +77,16 @@ public class jfEditora extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Gerente:");
 
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Telefone:");
 
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jtfEditEndereco.setBackground(new java.awt.Color(102, 102, 102));
         jtfEditEndereco.setToolTipText("Informe endereço completo");
 
+        jtfEditCNPJ.setBackground(new java.awt.Color(102, 102, 102));
         jtfEditCNPJ.setToolTipText("Informe somente números");
         jtfEditCNPJ.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -97,6 +104,7 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
 
+        jftfEditTelefone.setBackground(new java.awt.Color(102, 102, 102));
         try {
             jftfEditTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
@@ -104,6 +112,7 @@ public class jfEditora extends javax.swing.JFrame {
         }
         jftfEditTelefone.setToolTipText("Informe somente números");
 
+        jtfEditNome.setBackground(new java.awt.Color(102, 102, 102));
         jtfEditNome.setToolTipText("Informe o nome completo");
         jtfEditNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -111,6 +120,7 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
 
+        jtfEditGerente.setBackground(new java.awt.Color(102, 102, 102));
         jtfEditGerente.setToolTipText("Informe o nome completo");
         jtfEditGerente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -118,6 +128,8 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
 
+        jbEditLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbEditLimpar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditLimpar.setText("Limpar");
         jbEditLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,15 +137,27 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
 
+        jbEditEditar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbEditEditar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditEditar.setText("Editar");
         jbEditEditar.setEnabled(false);
 
+        jbEditSalvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbEditSalvar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditSalvar.setText("Salvar");
 
+        jbEditFechar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbEditFechar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditFechar.setText("Fechar");
+        jbEditFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditFecharActionPerformed(evt);
+            }
+        });
 
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
+        jtEditoras.setBackground(new java.awt.Color(102, 102, 102));
         jtEditoras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
@@ -156,10 +180,6 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtEditoras);
-
-        jLabel7.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Telefone:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -233,7 +253,7 @@ public class jfEditora extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         jLabel2.getAccessibleContext().setAccessibleName("Nome:");
@@ -310,6 +330,11 @@ public class jfEditora extends javax.swing.JFrame {
         jbEditLimpar.setEnabled(false);
         jtfEditCNPJ.setEnabled(false);
     }//GEN-LAST:event_jtEditorasMouseClicked
+
+    private void jbEditFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditFecharActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jbEditFecharActionPerformed
 
     /**
      * @param args the command line arguments
