@@ -77,10 +77,10 @@ public class jfCliente extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtfEndereco.setBackground(new java.awt.Color(102, 102, 102));
+        jtfEndereco.setBackground(new java.awt.Color(255, 255, 255));
         jtfEndereco.setToolTipText("Endereço completo");
 
-        jtfCPF.setBackground(new java.awt.Color(102, 102, 102));
+        jtfCPF.setBackground(new java.awt.Color(255, 255, 255));
         jtfCPF.setToolTipText("Informe somente números");
         jtfCPF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -93,7 +93,7 @@ public class jfCliente extends javax.swing.JFrame {
             }
         });
 
-        jtfNome.setBackground(new java.awt.Color(102, 102, 102));
+        jtfNome.setBackground(new java.awt.Color(255, 255, 255));
         jtfNome.setToolTipText("Informe o nome completo");
         jtfNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +106,7 @@ public class jfCliente extends javax.swing.JFrame {
             }
         });
 
-        jftfTelefone.setBackground(new java.awt.Color(102, 102, 102));
+        jftfTelefone.setBackground(new java.awt.Color(255, 255, 255));
         try {
             jftfTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
@@ -114,6 +114,7 @@ public class jfCliente extends javax.swing.JFrame {
         }
         jftfTelefone.setToolTipText("Informe somente números");
 
+        jbFechar.setBackground(new java.awt.Color(255, 255, 255));
         jbFechar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbFechar.setForeground(new java.awt.Color(0, 0, 0));
         jbFechar.setText("Fechar");
@@ -123,11 +124,13 @@ public class jfCliente extends javax.swing.JFrame {
             }
         });
 
+        jbEditar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditar.setText("Editar");
         jbEditar.setEnabled(false);
 
+        jbLimpar.setBackground(new java.awt.Color(255, 255, 255));
         jbLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbLimpar.setForeground(new java.awt.Color(0, 0, 0));
         jbLimpar.setText("Limpar");
@@ -139,7 +142,7 @@ public class jfCliente extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtClientes.setBackground(new java.awt.Color(102, 102, 102));
+        jtClientes.setBackground(new java.awt.Color(255, 255, 255));
         jtClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
@@ -170,6 +173,7 @@ public class jfCliente extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtClientes);
 
+        jbSalvar.setBackground(new java.awt.Color(255, 255, 255));
         jbSalvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbSalvar.setForeground(new java.awt.Color(0, 0, 0));
         jbSalvar.setText("Salvar");
@@ -325,14 +329,14 @@ public class jfCliente extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Metal look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

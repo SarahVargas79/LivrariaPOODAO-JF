@@ -83,10 +83,10 @@ public class jfEditora extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtfEditEndereco.setBackground(new java.awt.Color(102, 102, 102));
+        jtfEditEndereco.setBackground(new java.awt.Color(255, 255, 255));
         jtfEditEndereco.setToolTipText("Informe endereço completo");
 
-        jtfEditCNPJ.setBackground(new java.awt.Color(102, 102, 102));
+        jtfEditCNPJ.setBackground(new java.awt.Color(255, 255, 255));
         jtfEditCNPJ.setToolTipText("Informe somente números");
         jtfEditCNPJ.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -104,7 +104,7 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
 
-        jftfEditTelefone.setBackground(new java.awt.Color(102, 102, 102));
+        jftfEditTelefone.setBackground(new java.awt.Color(255, 255, 255));
         try {
             jftfEditTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
@@ -112,7 +112,7 @@ public class jfEditora extends javax.swing.JFrame {
         }
         jftfEditTelefone.setToolTipText("Informe somente números");
 
-        jtfEditNome.setBackground(new java.awt.Color(102, 102, 102));
+        jtfEditNome.setBackground(new java.awt.Color(255, 255, 255));
         jtfEditNome.setToolTipText("Informe o nome completo");
         jtfEditNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -120,7 +120,7 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
 
-        jtfEditGerente.setBackground(new java.awt.Color(102, 102, 102));
+        jtfEditGerente.setBackground(new java.awt.Color(255, 255, 255));
         jtfEditGerente.setToolTipText("Informe o nome completo");
         jtfEditGerente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -128,6 +128,7 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
 
+        jbEditLimpar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditLimpar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditLimpar.setText("Limpar");
@@ -137,15 +138,18 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
 
+        jbEditEditar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditEditar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditEditar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditEditar.setText("Editar");
         jbEditEditar.setEnabled(false);
 
+        jbEditSalvar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditSalvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditSalvar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditSalvar.setText("Salvar");
 
+        jbEditFechar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditFechar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditFechar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditFechar.setText("Fechar");
@@ -157,7 +161,7 @@ public class jfEditora extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jtEditoras.setBackground(new java.awt.Color(102, 102, 102));
+        jtEditoras.setBackground(new java.awt.Color(255, 255, 255));
         jtEditoras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
@@ -340,14 +344,14 @@ public class jfEditora extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Metal look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
