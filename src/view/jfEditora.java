@@ -6,6 +6,10 @@
 package view;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Editora;
+import services.EditoraServicos;
+import services.ServicosFactory;
 import util.Validadores;
 
 /**
@@ -19,6 +23,50 @@ public class jfEditora extends javax.swing.JFrame {
      */
     public jfEditora() {
         initComponents();
+        addRowToTable();
+        jbEditDeletar.setVisible(false);
+        this.setLocationRelativeTo(null);//Para centralizar a janela
+    }
+
+    public boolean validaInputs() {
+        if (jtfEditNome.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Preencher nome!");
+            jtfEditNome.requestFocus();
+            return false;
+        } else if (jtfEditCNPJ.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Preencher CNPJ!");
+            jtfEditCNPJ.requestFocus();
+            return false;
+        } else if (jftfEditTelefone.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Preencher telefone!");
+            jftfEditTelefone.requestFocus();
+            return false;
+        } else if (jtfEditEndereco.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Preencher endereço!");
+            jtfEditEndereco.requestFocus();
+            return false;
+        } else if (jtfEditGerente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Preeencher gerente!");
+            jtfEditGerente.requestFocus();
+            return false;
+        }
+        return true;
+    }//fim validaInputs
+
+    public void addRowToTable() {//Pegar o model limpar essa tabela e popular a mesma, se não fizer isso ela fica estática.
+        DefaultTableModel model = (DefaultTableModel) jtEditoras.getModel();
+        model.getDataVector().removeAllElements();//Remove todas as linhas.
+        model.fireTableDataChanged();
+        Object rowData[] = new Object[5];//rowData é o vetor para popular a linha da tabela por coluna
+        EditoraServicos editoraS = ServicosFactory.getEditoraServicos();
+        for (Editora e : editoraS.getEditoras()) {//O vetor sempre começa em 0
+            rowData[0] = e.getNomeEditora();
+            rowData[1] = e.getCnpj();
+            rowData[2] = e.getTelefone();
+            rowData[3] = e.getEndereco();
+            rowData[4] = e.getGerente();
+            model.addRow(rowData);//Add para popular.
+        }
     }
 
     /**
@@ -50,6 +98,7 @@ public class jfEditora extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtEditoras = new javax.swing.JTable();
+        jbEditDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerência Editora");
@@ -63,23 +112,23 @@ public class jfEditora extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Nome: ");
+        jLabel2.setText("*Nome: ");
 
         jLabel3.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("CNPJ:");
+        jLabel3.setText("*CNPJ:");
 
         jLabel4.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Endereço:");
+        jLabel4.setText("*Endereço:");
 
         jLabel5.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Gerente:");
+        jLabel5.setText("*Gerente:");
 
         jLabel7.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Telefone:");
+        jLabel7.setText("*Telefone:");
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -106,7 +155,7 @@ public class jfEditora extends javax.swing.JFrame {
 
         jftfEditTelefone.setBackground(new java.awt.Color(255, 255, 255));
         try {
-            jftfEditTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+            jftfEditTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -131,6 +180,7 @@ public class jfEditora extends javax.swing.JFrame {
         jbEditLimpar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditLimpar.setForeground(new java.awt.Color(0, 0, 0));
+        jbEditLimpar.setMnemonic('L');
         jbEditLimpar.setText("Limpar");
         jbEditLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,17 +191,30 @@ public class jfEditora extends javax.swing.JFrame {
         jbEditEditar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditEditar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditEditar.setForeground(new java.awt.Color(0, 0, 0));
+        jbEditEditar.setMnemonic('E');
         jbEditEditar.setText("Editar");
         jbEditEditar.setEnabled(false);
+        jbEditEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditEditarActionPerformed(evt);
+            }
+        });
 
         jbEditSalvar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditSalvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditSalvar.setForeground(new java.awt.Color(0, 0, 0));
+        jbEditSalvar.setMnemonic('S');
         jbEditSalvar.setText("Salvar");
+        jbEditSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditSalvarActionPerformed(evt);
+            }
+        });
 
         jbEditFechar.setBackground(new java.awt.Color(255, 255, 255));
         jbEditFechar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbEditFechar.setForeground(new java.awt.Color(0, 0, 0));
+        jbEditFechar.setMnemonic('F');
         jbEditFechar.setText("Fechar");
         jbEditFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,6 +247,17 @@ public class jfEditora extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtEditoras);
+
+        jbEditDeletar.setBackground(new java.awt.Color(255, 255, 255));
+        jbEditDeletar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbEditDeletar.setForeground(new java.awt.Color(0, 0, 0));
+        jbEditDeletar.setMnemonic('D');
+        jbEditDeletar.setText("Deletar");
+        jbEditDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditDeletarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,6 +292,8 @@ public class jfEditora extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbEditEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbEditDeletar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbEditSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbEditFechar)))
@@ -252,7 +328,8 @@ public class jfEditora extends javax.swing.JFrame {
                     .addComponent(jbEditLimpar)
                     .addComponent(jbEditEditar)
                     .addComponent(jbEditFechar)
-                    .addComponent(jbEditSalvar))
+                    .addComponent(jbEditSalvar)
+                    .addComponent(jbEditDeletar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -290,10 +367,12 @@ public class jfEditora extends javax.swing.JFrame {
 
     private void jtfEditCNPJFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfEditCNPJFocusLost
         // TODO add your handling code here:
-        if (!Validadores.isCNPJ(jtfEditCNPJ.getText())) {
-            JOptionPane.showMessageDialog(this, "CNPJ inválido.", "Erro CNPJ", JOptionPane.ERROR_MESSAGE);
+        if (!jtfEditCNPJ.getText().equals("")) {
+            if (!Validadores.isCNPJ(jtfEditCNPJ.getText())) {
+                JOptionPane.showMessageDialog(this, "CNPJ inválido.", "Erro CNPJ", JOptionPane.ERROR_MESSAGE);
 
-            jtfEditCNPJ.requestFocus();
+                jtfEditCNPJ.requestFocus();
+            }
         }
     }//GEN-LAST:event_jtfEditCNPJFocusLost
 
@@ -307,7 +386,7 @@ public class jfEditora extends javax.swing.JFrame {
 
     private void jtfEditGerenteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfEditGerenteKeyTyped
         // TODO add your handling code here:
-                String nletras = "0123456789<>:?/~^}][{´`=+-_!|'\'@#$%¨&*()²³£¢¬§º°ª";
+        String nletras = "0123456789<>:?/~^}][{´`=+-_!|'\'@#$%¨&*()²³£¢¬§º°ª";
         if (nletras.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
@@ -315,13 +394,26 @@ public class jfEditora extends javax.swing.JFrame {
 
     private void jbEditLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditLimparActionPerformed
         // TODO add your handling code here:
+        if (jbEditLimpar.getText().equals("Limpar")) {
+            limparCampos();
+        } else {
+            limparCampos();
+            jbEditLimpar.setText("Limpar");
+            jbEditSalvar.setText("Salvar");
+            jbEditEditar.setEnabled(false);
+            jtfEditCNPJ.setEnabled(true);
+            jbEditDeletar.setVisible(false);
+        }
+    }//GEN-LAST:event_jbEditLimparActionPerformed
+
+    public void limparCampos() {
         jtfEditNome.setText("");
         jtfEditCNPJ.setText("");
         jftfEditTelefone.setText("");
         jtfEditEndereco.setText("");
         jtfEditGerente.setText("");
         jtfEditNome.requestFocus();
-    }//GEN-LAST:event_jbEditLimparActionPerformed
+    }
 
     private void jtfEditCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEditCNPJActionPerformed
         // TODO add your handling code here:
@@ -330,15 +422,80 @@ public class jfEditora extends javax.swing.JFrame {
     private void jtEditorasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEditorasMouseClicked
         // TODO add your handling code here:
         jbEditEditar.setEnabled(true);
-        jbEditSalvar.setText("Confirmar");
-        jbEditLimpar.setEnabled(false);
-        jtfEditCNPJ.setEnabled(false);
+        jbEditDeletar.setVisible(true);
     }//GEN-LAST:event_jtEditorasMouseClicked
 
     private void jbEditFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditFecharActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbEditFecharActionPerformed
+
+    private void jbEditSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditSalvarActionPerformed
+        // TODO add your handling code here:
+        if (validaInputs()) {
+            //Pegar dados da tela para salvar
+            int idEditora = 0;
+            String nomeEditora = jtfEditNome.getText().toUpperCase();
+            String cnpj = jtfEditCNPJ.getText();
+            String endereco = jtfEditEndereco.getText().toUpperCase();
+            String telefone = jftfEditTelefone.getText();
+            String gerente = jtfEditGerente.getText().toUpperCase();
+            EditoraServicos editoraS = ServicosFactory.getEditoraServicos();
+
+            Editora e = new Editora(idEditora, nomeEditora, cnpj, endereco, telefone, gerente);
+            if (jbEditSalvar.getText().equals("Salvar")) {
+                editoraS.cadEditora(e);
+            } else {
+                editoraS.atualizarEditora(e);
+                jbEditLimpar.doClick();
+            }
+            limparCampos();
+            addRowToTable();
+        }
+    }//GEN-LAST:event_jbEditSalvarActionPerformed
+
+    private void jbEditEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditEditarActionPerformed
+        //ActionPerformed ação de clicar
+        jbEditSalvar.setText("Confirmar");
+        jtfEditCNPJ.setEnabled(false);
+        jbEditLimpar.setText("Cancelar");
+        jbEditDeletar.setVisible(false);
+        
+        //Pegando dados da tabela e add em variaveis locais.
+        int linha;
+        linha = jtEditoras.getSelectedRow();
+        String nome = (String) jtEditoras.getValueAt(linha, 0);
+        String cnpj = (String) jtEditoras.getValueAt(linha, 1);
+        String telefone = (String) jtEditoras.getValueAt(linha, 2);
+        String endereco = (String) jtEditoras.getValueAt(linha, 3);
+        String gerente = (String) jtEditoras.getValueAt(linha, 4);
+        //Carregar dados da tabela no form
+        jtfEditNome.setText(nome);
+        jtfEditCNPJ.setText(cnpj);
+        jftfEditTelefone.setText(telefone);
+        jtfEditEndereco.setText(endereco);
+        jtfEditGerente.setText(gerente);
+        jtfEditNome.requestFocus();
+    }//GEN-LAST:event_jbEditEditarActionPerformed
+
+    private void jbEditDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditDeletarActionPerformed
+        // TODO add your handling code here:
+        int linha;
+        String cnpj;
+        linha = jtEditoras.getSelectedRow();
+        cnpj = (String) jtEditoras.getValueAt(linha, 1);
+        EditoraServicos editoraS = ServicosFactory.getEditoraServicos();
+        Object[] resp = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(this, "Deseja realmente deletar este CNPJ? ", "Deletar", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, resp, resp[0]);
+        if (resposta == 0) {
+            editoraS.deletarEditora(cnpj);
+            addRowToTable();
+            JOptionPane.showMessageDialog(this, "Editora deletada com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Ok, entendo sua descisão!");
+        }
+        jbEditDeletar.setVisible(false);
+    }//GEN-LAST:event_jbEditDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,6 +543,7 @@ public class jfEditora extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton jbEditDeletar;
     private javax.swing.JButton jbEditEditar;
     private javax.swing.JButton jbEditFechar;
     private javax.swing.JButton jbEditLimpar;

@@ -9,6 +9,7 @@ import controller.CCliente;
 import controller.CEditora;
 import controller.CLivro;
 import controller.CVendaLivro;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,6 +25,7 @@ import services.ServicosFactory;
 import services.VendaLivroServicos;
 
 import util.Validadores;
+import view.Menu;
 
 /**
  *
@@ -518,7 +520,6 @@ public class LivrariaPOO {
         VendaLivroServicos vlS = ServicosFactory.getVendaLivros();
         ClienteServicos clienteS = ServicosFactory.getClienteServicos();
         LivroServicos livroS = ServicosFactory.getLivroServicos();
-        
 
         do {//Seleciona cliente   
             System.out.print("\nDigite o CPF do cliente: ");
@@ -550,7 +551,7 @@ public class LivrariaPOO {
             if (li.getEstoque() > 0) {
                 livros.add(li);
                 //cadLivro.atualizaEstoqueLivro(li.getIsbn());
-                int estoque = li.getEstoque() -1;
+                int estoque = li.getEstoque() - 1;
                 li.setEstoque(estoque);
                 livroS.atualizarLivro(li);
                 subTotal += li.getPreco();
@@ -572,11 +573,15 @@ public class LivrariaPOO {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {//A main dispara a chamada.
+    public static void main(String[] args) throws SQLException {//A main dispara a chamada.
         // TODO code application logic here
+        //Esse código chama o menu principal, por isso todo o resto foi comentado.
+        Menu jfMenu = new Menu();
+        jfMenu.setVisible(true);
 
         //CCliente ccli = new CCliente();
-        //Chamando mock. 
+        //Chamando mock.
+        /*
         cadCliente.mockClientes();
         cadEditora.mockEditoras();
         cadLivro.mockLivros();
@@ -661,5 +666,6 @@ public class LivrariaPOO {
                     break;
             }
         } while (opM != 0);//fim sistema
-    }
+         */
+    }//fim da main
 }
