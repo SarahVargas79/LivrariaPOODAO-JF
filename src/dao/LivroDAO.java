@@ -103,11 +103,14 @@ public class LivroDAO {
 
         try {
             Connection con = Conexao.getConexao();
-            String sql = "update livros set estoque = ?, preco = ? where isbn = ?";
+            String sql = "update livros set titulo = ?, autor = ?, assunto = ?, estoque = ?, preco = ? where isbn = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, liVO.getEstoque());
-            pst.setFloat(2, liVO.getPreco());
-            pst.setString(3, liVO.getIsbn());
+            pst.setString(1, liVO.getTitulo());
+            pst.setString(2, liVO.getAutor());
+            pst.setString(3, liVO.getAssunto());
+            pst.setInt(4, liVO.getEstoque());
+            pst.setFloat(5, liVO.getPreco());
+            pst.setString(6, liVO.getIsbn());
             pst.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("\nErro ao atualizar livro!\n" + ex.getMessage());
