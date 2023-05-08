@@ -54,9 +54,9 @@ public class jfLivro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Preeencher estoque!");
             jtfPreco.requestFocus();
             return false;
-        } else if (jtfEditora.getText().equals("")) {
+        } else if (jtfCNPJ.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Preeencher editora!");
-            jtfEditora.requestFocus();
+            jtfCNPJ.requestFocus();
             return false;
         }
         return true;
@@ -119,7 +119,7 @@ public class jfLivro extends javax.swing.JFrame {
         jtfISBN.setText("");
         jtfEstoque.setText("");
         jtfPreco.setText("");
-        jtfEditora.setText("");
+        jtfCNPJ.setText("");
         jtfTitulo.requestFocus();
     }
 
@@ -138,8 +138,9 @@ public class jfLivro extends javax.swing.JFrame {
         //ActionPerformed ação de clicar
         jbLivroSalvar.setText("Confirmar");
         jtfISBN.setEnabled(false);
+        jtfCNPJ.setEnabled(false);
         jbLivroLimpar.setText("Cancelar");
-        jbLivroEditar.setVisible(false);
+        jbLivroDeletar.setVisible(false);
 
         //Pegando dados da tabela e add em variaveis locais.
         int linha;
@@ -154,23 +155,23 @@ public class jfLivro extends javax.swing.JFrame {
         jtfISBN.setText(li.getIsbn());
         jtfEstoque.setText(String.valueOf(li.getEstoque()));
         jtfPreco.setText(String.valueOf(li.getPreco()));
-        jtfEditora.setText(li.getIdEditora().getCnpj());
+        jtfCNPJ.setText(li.getIdEditora().getCnpj());
         jtfTitulo.requestFocus();
     }
 
     private void jbEditDeletar(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int linha;
-        String isbn;
+        String cnpj;
         linha = jtLivros.getSelectedRow();
-        isbn = (String) jtLivros.getValueAt(linha, 1);
+        cnpj = (String) jtLivros.getValueAt(linha, 0);
         LivroServicos livroS = ServicosFactory.getLivroServicos();
         Object[] resp = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(this, "Deseja realmente deletar este ISBN? ", "Deletar", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, resp, resp[0]);
+        int resposta = JOptionPane.showOptionDialog(this, "Deseja realmente deletar este CNPJ? ", "Deletar", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, resp, resp[0]);
         if (resposta == 0) {
-            livroS.deletarLivro(isbn);
+            livroS.deletarLivro(cnpj);
             addRowToTable();
-            JOptionPane.showMessageDialog(this, "Livro deletada com sucesso!");
+            JOptionPane.showMessageDialog(this, "Livro deletado com sucesso!");
         } else {
             JOptionPane.showMessageDialog(this, "Ok, entendo sua descisão!");
         }
@@ -196,7 +197,7 @@ public class jfLivro extends javax.swing.JFrame {
         jtfISBN = new javax.swing.JTextField();
         jtfEstoque = new javax.swing.JTextField();
         jtfPreco = new javax.swing.JTextField();
-        jtfEditora = new javax.swing.JTextField();
+        jtfCNPJ = new javax.swing.JTextField();
         jbLivroLimpar = new javax.swing.JButton();
         jbLivroEditar = new javax.swing.JButton();
         jbLivroFechar = new javax.swing.JButton();
@@ -218,35 +219,36 @@ public class jfLivro extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Titulo:");
+        jLabel2.setText("*Titulo:");
 
         jLabel3.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Autor:");
+        jLabel3.setText("*Autor:");
 
         jLabel4.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Assunto:");
+        jLabel4.setText("*Assunto:");
 
         jLabel5.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("ISBN:");
+        jLabel5.setText("*ISBN:");
 
         jLabel6.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Estoque:");
+        jLabel6.setText("*Estoque:");
 
         jLabel7.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Preço:");
+        jLabel7.setText("*Preço:");
 
         jLabel8.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Editora:");
+        jLabel8.setText("*Editora:");
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
         jtfAssunto.setBackground(new java.awt.Color(255, 255, 255));
+        jtfAssunto.setToolTipText("Informe o assunto do livro");
         jtfAssunto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtfAssuntoKeyTyped(evt);
@@ -254,6 +256,7 @@ public class jfLivro extends javax.swing.JFrame {
         });
 
         jtfAutor.setBackground(new java.awt.Color(255, 255, 255));
+        jtfAutor.setToolTipText("Informe o autor do livro");
         jtfAutor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtfAutorKeyTyped(evt);
@@ -261,6 +264,7 @@ public class jfLivro extends javax.swing.JFrame {
         });
 
         jtfTitulo.setBackground(new java.awt.Color(255, 255, 255));
+        jtfTitulo.setToolTipText("Informe o título do livro");
         jtfTitulo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtfTituloKeyTyped(evt);
@@ -268,6 +272,7 @@ public class jfLivro extends javax.swing.JFrame {
         });
 
         jtfISBN.setBackground(new java.awt.Color(255, 255, 255));
+        jtfISBN.setToolTipText("Informe o registro ISBN ");
         jtfISBN.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtfISBNKeyTyped(evt);
@@ -275,13 +280,16 @@ public class jfLivro extends javax.swing.JFrame {
         });
 
         jtfEstoque.setBackground(new java.awt.Color(255, 255, 255));
+        jtfEstoque.setToolTipText("Informe o número de livros no estoque");
 
         jtfPreco.setBackground(new java.awt.Color(255, 255, 255));
+        jtfPreco.setToolTipText("Informe o preço do livro");
 
-        jtfEditora.setBackground(new java.awt.Color(255, 255, 255));
-        jtfEditora.addFocusListener(new java.awt.event.FocusAdapter() {
+        jtfCNPJ.setBackground(new java.awt.Color(255, 255, 255));
+        jtfCNPJ.setToolTipText("Informe o CNPJ da editora");
+        jtfCNPJ.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jtfEditoraFocusLost(evt);
+                jtfCNPJFocusLost(evt);
             }
         });
 
@@ -398,7 +406,7 @@ public class jfLivro extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfEditora))
+                        .addComponent(jtfCNPJ))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -451,7 +459,7 @@ public class jfLivro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jtfEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbLivroLimpar)
@@ -485,21 +493,21 @@ public class jfLivro extends javax.swing.JFrame {
         somenteNum(evt);
     }//GEN-LAST:event_jtfISBNKeyTyped
 
-    private void jtfEditoraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfEditoraFocusLost
+    private void jtfCNPJFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCNPJFocusLost
         // TODO add your handling code here:
         EditoraServicos editS = ServicosFactory.getEditoraServicos();
-        Editora edit = editS.buscarEditorabyCNPJ(jtfEditora.getText());
+        Editora edit = editS.buscarEditorabyCNPJ(jtfCNPJ.getText());
         if (edit.getCnpj() == null) {
             JOptionPane.showMessageDialog(this, "Editora não cadastrada!", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
         } else {
             Object[] resp = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(this, "Editora " + edit.getNomeEditora() + " está correta? ", "Pesquisa", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, resp, resp[0]);
             if (resposta == 1) {
-                jtfEditora.setText("");
-                jtfEditora.requestFocus();
+                jtfCNPJ.setText("");
+                jtfCNPJ.requestFocus();
             }
         }
-    }//GEN-LAST:event_jtfEditoraFocusLost
+    }//GEN-LAST:event_jtfCNPJFocusLost
 
     private void jtfTituloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfTituloKeyTyped
         // TODO add your handling code here:
@@ -521,7 +529,7 @@ public class jfLivro extends javax.swing.JFrame {
             int estoque = Integer.parseInt(jtfEstoque.getText());
             float preco = Float.parseFloat(jtfPreco.getText());
             EditoraServicos editS = ServicosFactory.getEditoraServicos();
-            Editora edit = editS.buscarEditorabyCNPJ(jtfEditora.getText());
+            Editora edit = editS.buscarEditorabyCNPJ(jtfCNPJ.getText());
             LivroServicos livroS = ServicosFactory.getLivroServicos();
 
             Livro li = new Livro(idLivro, titulo, autor, assunto, isbn, estoque, preco, edit);
@@ -633,7 +641,7 @@ public class jfLivro extends javax.swing.JFrame {
     private javax.swing.JTable jtLivros;
     private javax.swing.JTextField jtfAssunto;
     private javax.swing.JTextField jtfAutor;
-    private javax.swing.JTextField jtfEditora;
+    private javax.swing.JTextField jtfCNPJ;
     private javax.swing.JTextField jtfEstoque;
     private javax.swing.JTextField jtfISBN;
     private javax.swing.JTextField jtfPreco;
