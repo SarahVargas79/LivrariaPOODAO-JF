@@ -162,14 +162,14 @@ public class jfLivro extends javax.swing.JFrame {
     private void jbEditDeletar(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int linha;
-        String cnpj;
+        String isbn;
         linha = jtLivros.getSelectedRow();
-        cnpj = (String) jtLivros.getValueAt(linha, 0);
+        isbn = (String) jtLivros.getValueAt(linha, 3);
         LivroServicos livroS = ServicosFactory.getLivroServicos();
         Object[] resp = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(this, "Deseja realmente deletar este CNPJ? ", "Deletar", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, resp, resp[0]);
+        int resposta = JOptionPane.showOptionDialog(this, "Deseja realmente deletar este ISBN? ", "Deletar", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, resp, resp[0]);
         if (resposta == 0) {
-            livroS.deletarLivro(cnpj);
+            livroS.deletarLivro(isbn);
             addRowToTable();
             JOptionPane.showMessageDialog(this, "Livro deletado com sucesso!");
         } else {
